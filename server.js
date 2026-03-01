@@ -2,7 +2,13 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: ['https://caminoazul.great-site.net', 'http://localhost', 'http://127.0.0.1'],
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
+
 app.use(express.json());
 
 const ARIA_SYSTEM = `Eres "Aria", una asistente virtual empática y cálida de la página Camino Azul, especializada en apoyar a familias colombianas con hijos con autismo (TEA).
@@ -66,4 +72,4 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => console.log(`Aria backend corriendo en puerto ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Aria backend corriendo en puerto ${PORT}`));
